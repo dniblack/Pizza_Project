@@ -11,6 +11,9 @@ function getReceipt() {
 			text1 = text1+selectedSize+"<br>";
         }
     }
+    // This creates a "pricing" for the pizza so that once an option
+    // is picked, it is used as the basis for the total of the pizza
+    //Each sizing has a specific pricing unique to it
     if (selectedSize === "Personal Pizza") {
         sizeTotal = 6;
     } else if (selectedSize === "Small Pizza") {
@@ -24,6 +27,8 @@ function getReceipt() {
     } else if (selectedSize === "Super Sized Pizza") {
         sizeTotal = 20;
     }
+    // once the final items are picked, the total price will be logged and presented
+    // and the order items will also display alongisde it
     runningTotal = sizeTotal;
     console.log(selectedSize+" = $"+sizeTotal+".00");
     console.log("size text1: "+text1);
@@ -32,6 +37,8 @@ function getReceipt() {
     getTopping(runningTotal,text1);
 };
 
+// starts the topping number at 0
+// when the user selects a topping, it will be added to the number of toppings selected and logged
 function getTopping(runningTotal,text1) {
 	var toppingTotal = 0;
 	var selectedTopping = [];
@@ -43,6 +50,9 @@ function getTopping(runningTotal,text1) {
 			text1 = text1+toppingArray[j].value+"<br>";
         }
     }
+
+    //created an if else statement that says that unless the selected toppings are 0 or more than 1,
+    // one topping count will be taken from the overall count, essentially giving a "discount" of a free topping
     var toppingCount = selectedTopping.length;
 	if (toppingCount > 1) {
 		toppingTotal = (toppingCount - 1);
@@ -56,4 +66,5 @@ function getTopping(runningTotal,text1) {
     console.log("Purchase Total: "+"$"+runningTotal+".00");
     document.getElementById("showText").innerHTML=text1;
     document.getElementById("totalPrice").innerHTML = "</h3>Total: <strong>$"+runningTotal+".00"+"</strong></h3>";
-};
+}; // presents the list and total to the user who selected all the ingredients and pizza sizing
+// the calculations include the topping prices, pizza size price, free topping price, and overall pizza price.
